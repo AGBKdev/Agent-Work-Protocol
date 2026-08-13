@@ -1,0 +1,75 @@
+{
+  "$schema_note": "Source of truth for agent work. Prose elsewhere is commentary; this file is authoritative. QA verifies THIS file, not chat history.",
+  "project": "<project name>",
+  "task": "<one-sentence statement of the overall task>",
+  "status": "in_progress",
+  "updated": "<ISO 8601 timestamp>",
+  "environment": {
+    "$note": "Pin every version a claim could depend on. QA verifies claims against THESE versions.",
+    "os": "<e.g. Ubuntu 24.04 LTS>",
+    "gpu": "<model, VRAM, driver>",
+    "tool": "<main tool + exact version + install path>",
+    "python": "<version>",
+    "key_packages": "<package==version, ...>"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "action": "<what this step does>",
+      "status": "todo | in_progress | done",
+      "claims": ["<claim ids this step produced or depends on>"],
+      "artifacts": ["<files this step produced>"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D-001",
+      "date": "<YYYY-MM-DD>",
+      "decision": "<what was decided>",
+      "rationale": "<why — cite claim ids, not vibes>",
+      "reversible": true,
+      "status": "active | superseded",
+      "artifact": "<file or path the decision produced, if any>"
+    }
+  ],
+  "open_questions": [
+    "<one unresolved question per entry, phrased so a yes/no or a number closes it>"
+  ],
+  "blocked_on": [],
+  "claims": [
+    {
+      "id": "C-001",
+      "claim": "<ONE atomic, checkable statement. Not 'X works with our setup' but 'X version N supports feature Y under condition Z.'>",
+      "source": "<URL of the official doc, or a description of the direct measurement>",
+      "source_type": "official_docs | release_notes | license_text | vendor_kb | code_inspection | direct_measurement | unverified_memory",
+      "method": "documented | empirical",
+      "verified": false,
+      "confidence": "unverified | verified | partially_supported | refuted"
+    },
+    {
+      "id": "C-002",
+      "claim": "EXAMPLE (delete): Flamenco 3.9.2 supports two-way path variables for cross-platform output paths.",
+      "source": "https://flamenco.blender.org/usage/variables/multi-platform/",
+      "source_type": "official_docs",
+      "method": "documented",
+      "verified": true,
+      "confidence": "verified"
+    }
+  ],
+  "qa": {
+    "last_run": null,
+    "result": null,
+    "note": "QA pass reads ONLY this file. For each claim: fetch the source, confirm it supports the statement for the pinned version, set verified/confidence, and log failures below. Run as a subagent with task.json as its only input.",
+    "failures": [],
+    "verifications": [
+      {
+        "item": "<claim id>",
+        "result": "CONFIRMED | PARTIALLY_SUPPORTED | DOES_NOT_SUPPORT | SOURCE_UNREACHABLE",
+        "detail": "<what the source actually says>"
+      }
+    ]
+  },
+  "resume_here": [
+    "<ordered list: exactly what the next session should do first>"
+  ]
+}
