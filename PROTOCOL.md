@@ -32,6 +32,30 @@ before it enters task.json as verified.
 Anything stated from model memory is tagged `source_type:
 "unverified_memory"` and `confidence: "unverified"` until checked.
 
+**Why memory ranks last, and not as a formality.** A model's training corpus is
+not a neutral sample of the web. The sources with the most to protect opt out
+of crawling; the ones with the least stay open. Measured 2026-08-14, by reading
+`robots.txt`:
+
+| source | AI crawlers disallowed |
+|---|---|
+| `learn.foundry.com` | GPTBot |
+| `docs.blender.org` | GPTBot, ClaudeBot, CCBot, Google-Extended |
+| `stackoverflow.com` | none named |
+| `reddit.com` | none named |
+
+So on precisely the subjects where a vendor's own documentation is the
+authority, the model's recall is thinnest — while its recall of the forum
+thread arguing about that documentation is intact. An agent answering from
+memory in such a domain is not handing you a blurrier version of the docs. It
+is handing you the forum.
+
+Note what this does and does not constrain: it is about *crawling for
+training*, not about fetching a page you name. Those same documentation pages
+returned HTTP 200 to a live fetch on the same day. Which is the whole reason
+rule 1 is cheap to obey — the good source is still there, it just is not in the
+model. Go and get it.
+
 ### 2. Claims are atomic
 
 One checkable statement per claim. Not "the render manager works with our
