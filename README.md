@@ -93,4 +93,13 @@ precisely to stop unmeasured numbers being presented as measured.
 
 ## License
 
-Apache-2.0. Use it, adapt it, ship it with your own projects.
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — © 2026 Axel Gimenez.
+
+Use it, adapt it, ship it with your own projects, commercially or not. The one
+condition is attribution: credit the source and say if you changed it. Keeping
+this README's title line in your copy of `_agent/` is enough.
+
+A Creative Commons licence rather than a software one because what is being
+licensed here is writing — rules, templates and the reasoning behind them. It
+was Apache-2.0 until v1.0, which is a source-code licence whose terms are about
+object code, patent grants and NOTICE files. None of that describes prose.
