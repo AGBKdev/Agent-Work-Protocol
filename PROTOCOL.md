@@ -150,7 +150,15 @@ which cannot be caught out has not been tested, it has only been used.
 ## Setup (once per project)
 
 ```bash
-cp -r agent-work-protocol /path/to/project/_agent
+git clone https://github.com/AGBKdev/Agent-Work-Protocol
+cp -r Agent-Work-Protocol /path/to/project/_agent
+
+# Drop the clone's own .git, or `git add _agent` stores a GITLINK instead of
+# the files — it prints "adding embedded git repository", exits 0, and none of
+# this protocol actually lands in your repo. Nobody notices until a fresh
+# clone of the project comes down with an empty _agent/.
+rm -rf /path/to/project/_agent/.git
+
 cd /path/to/project
 
 # Init ONLY if not already inside a repo. Never run a bare `git init` from an
@@ -158,7 +166,11 @@ cd /path/to/project
 git rev-parse --show-toplevel 2>/dev/null || git init -b main
 git rev-parse --show-toplevel        # verify: must be THIS project
 
-# A .gitignore must exist before the first `git add -A`.
+# A .gitignore must exist before the first `git add -A` (rule 5). If the
+# project has none, create it — naming a file that does not exist fails the
+# whole command with `fatal: pathspec '.gitignore' did not match any files`.
+[ -f .gitignore ] || printf '.DS_Store\n' > .gitignore
+
 git add _agent .gitignore && git commit -m "add agent protocol"
 ```
 
