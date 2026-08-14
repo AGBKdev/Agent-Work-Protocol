@@ -26,6 +26,11 @@ checkable statement, with a source, tagged `verified: false` until a
 fetched the source and confirmed it. Agents hand off through the JSON, not
 through prose summaries of each other.
 
+Anything the work depends on then gets a second, **adversarial** pass whose job
+is to refute it. QA catches a claim whose source is fake or misquoted; only
+refutation catches the commoner one, where the source is real and accurate and
+still does not say what the claim says.
+
 At the end of every session, any finding that would hold on a *different*
 project gets promoted to a cross-project knowledge base
 (`KNOWLEDGE/LAWS.md`) immediately — with an id, evidence pointer, and a
@@ -47,7 +52,7 @@ measured`). Contradicted laws are marked superseded, never deleted.
 
 ## What's in the box
 
-- `PROTOCOL.md` — the six rules, with the war stories that made them rules
+- `PROTOCOL.md` — the nine rules, with the war stories that made them rules
 - `MEMORY.md` — annotated template
 - `task.json` — annotated template with the claim/QA schema and one worked example
 - `KNOWLEDGE/LAWS.md` — knowledge-base template with the law format

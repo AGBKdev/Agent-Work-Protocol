@@ -98,6 +98,55 @@ recovered out of a 533-line project narrative by a dedicated audit, because
 nobody promoted them as they were found. Every one was already known and
 already paid for. That is the cost of skipping this step.
 
+### 7. Adversarial verification on anything load-bearing
+
+Rule 3 asks: *does the source support this claim?* That catches a fabricated
+source and a misquoted one. It does not catch the failure that actually gets
+through — a real source, honestly cited, that does not say what the claim says.
+
+So for any claim the work depends on, run a second pass whose job is to
+**refute it**. Not to review it, not to sanity-check it: to break it. Give the
+refuter the claim, its evidence, and an instruction to default to *refuted*
+when it cannot prove otherwise. A claim that is true but wrong in a detail that
+would mislead the person acting on it counts as refuted — say what the correct
+version is.
+
+Run the refuters independently, and where a claim can fail in more than one
+way, give each a different lens (is it correct / is it complete / does it
+still hold in the current version) rather than asking the same question twice.
+
+Why this is a rule: a README once claimed a file format was readable by four
+applications. Every claim had a source and passed QA. A refutation pass found
+one of the four had no support for that format at all — the string did not
+appear anywhere in the application — and a second was only true via a plug-in
+the docs never mentioned. Two of four compatibility claims were wrong, and
+nothing in rules 1-3 was going to catch it, because the sources were real and
+the citations were accurate. The claims had simply never been *tested*.
+
+### 8. A stability metric is never reported without a paired detail metric
+
+Any metric that rewards *the absence of change* is maximised by a result that
+has nothing in it. Temporal stability is perfect on a frozen frame. Variance is
+lowest on a flat one. Error rate is zero for a system that refuses to answer.
+
+Report such a number alone and it will be optimised — by a model, by a
+pipeline, or just by whoever is choosing between two options — straight towards
+the degenerate case. So pair it: whenever you report a metric that punishes
+change, report alongside it one that punishes emptiness, and state both or
+neither.
+
+### 9. A new metric is guilty until it convicts a known-bad input
+
+Before a metric is allowed to inform a decision, feed it inputs you already
+know are bad and confirm it ranks them badly.
+
+The test is cheap and specific. For a video-quality metric: score a
+deliberately over-smoothed clip and a completely static one. If either
+outranks real footage, the metric is measuring the wrong thing and every
+decision it has informed so far needs revisiting. Construct the equivalent
+known-bad input for whatever you are measuring — the point is that a metric
+which cannot be caught out has not been tested, it has only been used.
+
 ## Setup (once per project)
 
 ```bash
