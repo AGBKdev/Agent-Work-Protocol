@@ -275,6 +275,13 @@ cp -r ~/agent-work-protocol/KNOWLEDGE ~/agent-knowledge
 Record that absolute path in every project's `task.json` `environment` block.
 Versioning it is optional and cheap: `cd ~/agent-knowledge && git init -b main`.
 
+**Already have a knowledge base? Skip the copy and point at yours.** The
+`KNOWLEDGE/` folder in this clone is a seed for someone starting from nothing.
+If you already keep cross-project findings somewhere, that is your store —
+record its path and ignore the seed. Running the copy anyway gives you a second,
+empty knowledge base, which is the fragmentation rule 6 exists to prevent,
+reached by following these instructions too literally.
+
 ### Once per project
 
 ```bash
