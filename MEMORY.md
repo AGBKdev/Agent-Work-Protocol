@@ -13,9 +13,10 @@ resurrects them. Date the pivots.>
 
 ## Environment
 
-<Pin every version an agent might assert something about. Claims are
-verified against THESE versions, so an unpinned version makes rule 1
-unenforceable. Example entries:>
+<A human-readable echo of `task.json`'s `environment` block, plus the path
+to your shared knowledge base. task.json holds the authoritative pin — this
+is commentary, and if the two ever disagree, task.json wins. Example
+entries:>
 
 - **Workstation:** <OS, GPU, driver>
 - **<Main tool>** <version> at <path>, <how it's launched>

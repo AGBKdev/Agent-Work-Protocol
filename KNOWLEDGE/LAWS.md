@@ -1,6 +1,11 @@
 # LAWS — cross-project knowledge base
 
 Findings that would hold on a different project, with different assets.
+
+**This file lives once, outside any single project.** If you are reading a copy
+inside some project's `_agent/`, it is in the wrong place — see PROTOCOL.md
+Setup. One shared store is what makes a "cross-project" knowledge base cross
+projects.
 Promoted at end of session per PROTOCOL.md rule 6 — never "later".
 
 Format, one law per entry:
