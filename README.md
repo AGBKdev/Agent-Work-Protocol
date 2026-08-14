@@ -37,6 +37,56 @@ project gets promoted to a cross-project knowledge base
 confidence tag (`measured` / `single observation` / `reasoned, not
 measured`). Contradicted laws are marked superseded, never deleted.
 
+## Why the model's own knowledge is the weakest link
+
+Underneath both of those sits a problem people underrate: **what an LLM knows
+about a subject is not a neutral sample of what is known about it.** It is not
+a third failure mode so much as the reason the first one bites harder than it
+looks.
+
+Sites with the most to protect opt out of AI crawling. Sites with the least
+stay open. Read the `robots.txt` files and the shape is plain — Blender's
+official documentation disallows GPTBot, ClaudeBot, CCBot and Google-Extended;
+Stack Overflow and Reddit name no AI crawler at all. (Full table, with the date
+it was measured, in PROTOCOL.md rule 1.)
+
+Follow that through. On exactly the subjects where a vendor's own docs are the
+authority, the model's recall is thinnest — and its recall of the forum thread
+arguing about those docs is intact. So "the agent answered from memory" does
+not mean you got a blurry copy of the documentation. It means you got the
+forum, in the documentation's confident voice.
+
+That is worse than random hallucination, because it is *systematic*. It skews
+one way, toward the open and less authoritative half of the web, and it skews
+hardest in the technical domains where you are least able to eyeball the answer.
+
+**What this protocol does about it**
+
+- **Model memory is a source class, and it ranks last.** Anything asserted from
+  recall is tagged `source_type: "unverified_memory"`, `confidence:
+  "unverified"`. Not as ceremony — as the correct prior, given the above.
+- **Forums are leads, not sources.** Rule 1 lets you *start* at Stack Overflow.
+  It does not let the answer enter `task.json` as verified until it has been
+  re-checked against a vendor doc, release note, licence text or the code.
+- **QA fetches live, at verification time.** The gap is in the training corpus,
+  not in your reach: those same blocked doc pages answer an ordinary HTTP
+  request perfectly well. Rule 3 routes around the problem entirely.
+- **A blocked source fails loudly.** If the good source genuinely cannot be
+  reached, the verdict is `SOURCE_UNREACHABLE` and the claim goes to
+  `confidence: "unreachable"` — visibly unresolved, rather than quietly
+  downgraded to whatever *was* reachable. Silent substitution is the thing to
+  prevent.
+- **And the docs themselves get tested.** Rule 7 exists because an official
+  source can be real, correctly cited, and still wrong. That happened while
+  writing this: a vendor's current documentation listed control names that do
+  not exist in the shipping software, and only a pass that went and enumerated
+  them on a live instance caught it.
+
+**What it does not do.** It cannot read what is blocked, it cannot make a
+vendor's documentation correct, and it cannot tell you that an entire field's
+online consensus is wrong. It narrows the blast radius of bad inputs; it does
+not eliminate them.
+
 ## Quickstart
 
 0. **Once, on first adoption:** place `KNOWLEDGE/` outside any project, at a
